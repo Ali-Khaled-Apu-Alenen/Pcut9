@@ -43,3 +43,8 @@ app.*.map.json
 /android/app/debug
 /android/app/profile
 /android/app/release
+# Ignore heavy binaries and generated outputs
+/Exported_Reports/
+/Installer_Output/
+/PCut9_Portable_Release/
+*.exe

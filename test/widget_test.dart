@@ -1,30 +1,24 @@
-// This is a basic Flutter widget test.
-//
-// To perform an interaction with a widget in your test, use the WidgetTester
-// utility in the flutter_test package. For example, you can send tap and scroll
-// gestures. You can also use WidgetTester to find child widgets in the widget
-// tree, read text, and verify that the values of widget properties are correct.
-
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
-
-import 'package:pcut9/main.dart';
+import 'package:pcut9/features/editor/models/editor_state.dart';
 
 void main() {
-  testWidgets('Counter increments smoke test', (WidgetTester tester) async {
-    // Build our app and trigger a frame.
-    await tester.pumpWidget(const MyApp());
+  test('VideoClipData entity defaults to full frame crop', () {
+    const clip = VideoClipData(
+      id: 'test-1',
+      filePath: 'dummy.mp4',
+      fileName: 'dummy.mp4',
+      totalDuration: Duration(seconds: 10),
+    );
 
-    // Verify that our counter starts at 0.
-    expect(find.text('0'), findsOneWidget);
-    expect(find.text('1'), findsNothing);
+    expect(clip.cropX, equals(0.0));
+    expect(clip.cropY, equals(0.0));
+    expect(clip.cropWidth, equals(1.0));
+    expect(clip.cropHeight, equals(1.0));
+  });
 
-    // Tap the '+' icon and trigger a frame.
-    await tester.tap(find.byIcon(Icons.add));
-    await tester.pump();
-
-    // Verify that our counter has incremented.
-    expect(find.text('0'), findsNothing);
-    expect(find.text('1'), findsOneWidget);
+  test('IncidentReport entity defaults both Intro and Outro to true', () {
+    const report = IncidentReport();
+    expect(report.includeIntro, isTrue);
+    expect(report.includeOutro, isTrue);
   });
 }
